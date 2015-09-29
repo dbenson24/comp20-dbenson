@@ -1,0 +1,14 @@
+.homer {
+    height: 112px;
+    width: 167px;
+    overflow: hidden;
+    background-image: url("./homer.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0% 0%;
+    
+}
+
+body {
+    margin: 0;
+}
