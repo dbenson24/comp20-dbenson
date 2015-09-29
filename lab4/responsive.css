@@ -27,27 +27,32 @@ If the browser screen width less than or equals to 600 pixels, display the final
         background-position: 167px 0px;
     }
 }
-@media only screen and (min-device-width : 1100px) and (max-device-width : 1200px) {
+@media only screen and (min-device-width : 1000px) and (max-device-width : 1100px) {
     .homer {
         background-position: 0px 0px;
     }
 }
-@media only screen and (min-device-width : 1100px) and (max-device-width : 1200px) {
+@media only screen and (min-device-width : 900px) and (max-device-width : 1000px) {
     .homer {
         background-position: 0px 0px;
     }
 }
-@media only screen and (min-device-width : 1100px) and (max-device-width : 1200px) {
+@media only screen and (min-device-width : 800px) and (max-device-width : 900px) {
     .homer {
         background-position: 0px 0px;
     }
 }
-@media only screen and (min-device-width : 1100px) and (max-device-width : 1200px) {
+@media only screen and (min-device-width : 700px) and (max-device-width : 800px) {
     .homer {
         background-position: 0px 0px;
     }
 }
-@media only screen and (min-device-width : 1100px) and (max-device-width : 1200px) {
+@media only screen and (min-device-width : 600px) and (max-device-width : 700px) {
+    .homer {
+        background-position: 0px 0px;
+    }
+}
+@media only screen and (max-device-width : 600px) {
     .homer {
         background-position: 0px 0px;
     }
