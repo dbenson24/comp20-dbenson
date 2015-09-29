@@ -22,37 +22,37 @@ If the browser screen width is greater than 600 pixels but less than or equal to
 If the browser screen width less than or equals to 600 pixels, display the final image on the comic, the bottom-right-most image of homer.jpg that reads "The End".
 */
 
-@media only screen and (min-device-width : 1100px) and (max-device-width : 1200px) {
+@media all and (min-width : 1100px) and (max-width : 1200px) {
     .homer {
-        background-position: 167px 0px;
+        background-position: -167px 0px;
     }
 }
-@media only screen and (min-device-width : 1000px) and (max-device-width : 1100px) {
+@media all and (min-width : 1000px) and (max-width : 1100px) {
     .homer {
-        background-position: 0px 0px;
+        background-position: 0px -125px;
     }
 }
-@media only screen and (min-device-width : 900px) and (max-device-width : 1000px) {
+@media all and (min-width : 900px) and (max-width : 1000px) {
     .homer {
-        background-position: 0px 0px;
+        background-position: -167px -125px;
     }
 }
-@media only screen and (min-device-width : 800px) and (max-device-width : 900px) {
-    .homer {
-        background-position: 0px 0px;
-    }
-}
-@media only screen and (min-device-width : 700px) and (max-device-width : 800px) {
+@media all and (min-width : 800px) and (max-width : 900px) {
     .homer {
         background-position: 0px 0px;
     }
 }
-@media only screen and (min-device-width : 600px) and (max-device-width : 700px) {
+@media all and (min-width : 700px) and (max-width : 800px) {
     .homer {
         background-position: 0px 0px;
     }
 }
-@media only screen and (max-device-width : 600px) {
+@media only screen and (min-width : 600px) and (max-width : 700px) {
+    .homer {
+        background-position: 0px 0px;
+    }
+}
+@media only screen and (max-width : 600px) {
     .homer {
         background-position: 0px 0px;
     }
