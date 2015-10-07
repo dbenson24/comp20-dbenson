@@ -1,5 +1,9 @@
   var Frame, Sprite,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    __bind = function(fn, me) {
+      return function() {
+        return fn.apply(me, arguments);
+      };
+    };
 
   Frame = (function() {
     function Frame(sx, sy, sWidth, sHeight) {
@@ -58,14 +62,37 @@
     backgroundImg.src = "./duckhunt-background.gif";
     actorsImg = new Image();
     actorsImg.onload = function() {
-      var bird1, bird1Frames;
+      var bird1, bird1Frames, bird2, bird2Frames, bird3, bird3Frames, dog, dogFrames;
       bird1Frames = [];
       bird1Frames.push(new Frame(0, 113, 40, 40));
       bird1Frames.push(new Frame(40, 113, 40, 40));
       bird1Frames.push(new Frame(80, 113, 40, 40));
       bird1 = new Sprite(context, actorsImg, 250, 150, 80, 80, bird1Frames);
       setInterval(bird1.changeFrame, 150);
-      return sprites.push(bird1);
+      sprites.push(bird1);
+      bird2Frames = [];
+      bird2Frames.push(new Frame(125, 113, 40, 40));
+      bird2Frames.push(new Frame(165, 113, 40, 40));
+      bird2Frames.push(new Frame(205, 113, 40, 40));
+      bird2 = new Sprite(context, actorsImg, 350, 150, 80, 80, bird2Frames);
+      setInterval(bird2.changeFrame, 150);
+      sprites.push(bird2);
+      bird3Frames = [];
+      bird3Frames.push(new Frame(260, 150, 40, 40));
+      bird3Frames.push(new Frame(300, 150, 40, 40));
+      bird3Frames.push(new Frame(340, 150, 40, 40));
+      bird3 = new Sprite(context, actorsImg, 450, 150, 80, 80, bird3Frames);
+      setInterval(bird3.changeFrame, 150);
+      sprites.push(bird3);
+      dogFrames = [];
+      dogFrames.push(new Frame(0, 0, 60, 50));
+      dogFrames.push(new Frame(60, 0, 60, 50));
+      dogFrames.push(new Frame(120, 0, 60, 50));
+      dogFrames.push(new Frame(180, 0, 60, 50));
+      dogFrames.push(new Frame(240, 0, 60, 50));
+      dog = new Sprite(context, actorsImg, 350, 350, 120, 100, dogFrames);
+      setInterval(dog.changeFrame, 150);
+      return sprites.push(dog);
     };
     actorsImg.src = "./duckhunt_various_sheet.png";
     drawSprites = function() {
