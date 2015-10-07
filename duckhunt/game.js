@@ -42,22 +42,42 @@
   })();
 
   window.init = function() {
+
+    /*
+    Retrieve the canvas and initialize the array of sprites
+     */
     var actorsImg, backgroundImg, canvas, context, drawSprites, sprites;
     canvas = document.getElementById("game_canvas");
     context = canvas.getContext("2d");
     sprites = [];
+
+    /*
+    Load the background image in and any other actors that will be on the canvas.
+    Once each has been initialized push it onto the sprites array.
+     */
     backgroundImg = new Image();
     backgroundImg.onload = function() {
       var frames, sprite, temp;
       frames = [];
       frames.push(new Frame(0, 0, 256, 240));
       sprite = new Sprite(context, backgroundImg, 0, 0, 800, 600, frames);
+
+      /*
+      Make sure that the background is drawn before any other sprites
+       */
       temp = [sprite];
       return sprites = temp.concat(sprites);
     };
     backgroundImg.src = "./duckhunt-background.gif";
     actorsImg = new Image();
     actorsImg.onload = function() {
+
+      /*
+      Create the frames and initialize all the sprites
+      setInterval is used to cycle through the animations
+      setInterval is again used to change the x location of the dog
+      to simulate walking
+       */
       var bird1, bird1Frames, bird2, bird2Frames, bird3, bird3Frames, dog, dogFrames, walkDog;
       bird1Frames = [];
       bird1Frames.push(new Frame(0, 113, 40, 40));
@@ -95,6 +115,10 @@
       return sprites.push(dog);
     };
     actorsImg.src = "./duckhunt_various_sheet.png";
+
+    /*
+    Logic for redrawing the canvas at about 30 fps
+     */
     drawSprites = function() {
       var s, _i, _len, _results;
       context.clearRect(0, 0, 800, 600);
