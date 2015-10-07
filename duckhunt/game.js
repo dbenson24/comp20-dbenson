@@ -1,9 +1,5 @@
   var Frame, Sprite,
-    __bind = function(fn, me) {
-      return function() {
-        return fn.apply(me, arguments);
-      };
-    };
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   Frame = (function() {
     function Frame(sx, sy, sWidth, sHeight) {
@@ -62,7 +58,7 @@
     backgroundImg.src = "./duckhunt-background.gif";
     actorsImg = new Image();
     actorsImg.onload = function() {
-      var bird1, bird1Frames, bird2, bird2Frames, bird3, bird3Frames, dog, dogFrames;
+      var bird1, bird1Frames, bird2, bird2Frames, bird3, bird3Frames, dog, dogFrames, walkDog;
       bird1Frames = [];
       bird1Frames.push(new Frame(0, 113, 40, 40));
       bird1Frames.push(new Frame(40, 113, 40, 40));
@@ -92,6 +88,10 @@
       dogFrames.push(new Frame(240, 0, 60, 50));
       dog = new Sprite(context, actorsImg, 350, 350, 120, 100, dogFrames);
       setInterval(dog.changeFrame, 150);
+      walkDog = function() {
+        return dog.x = (dog.x + 10) % canvas.width;
+      };
+      setInterval(walkDog, 150);
       return sprites.push(dog);
     };
     actorsImg.src = "./duckhunt_various_sheet.png";
