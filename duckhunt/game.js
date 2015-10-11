@@ -56,12 +56,10 @@
         return function() {
           _this.x = (_this.x + dx) % (_this.context.canvas.width + _this.width);
           if (_this.x + _this.width < 0) {
-            console.log("Min width reached at:", _this.x);
             _this.x = _this.context.canvas.width + _this.width;
           }
           _this.y = (_this.y + dy) % (_this.context.canvas.height + _this.height);
           if (_this.y + _this.height < 0) {
-            console.log("Min height reached at:", _this.y);
             return _this.y = _this.context.canvas.height + _this.height;
           }
         };
