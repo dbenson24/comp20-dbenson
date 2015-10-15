@@ -6,3 +6,22 @@ body {
     min-height: 500px;
     height: 70%;
 }
+
+.location {
+    text-align: center;
+}
+
+.location p {
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.location h2 {
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.location:nth-child(even) {
+    background-color:#B2E6FF;
+}

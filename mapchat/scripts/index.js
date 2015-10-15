@@ -6,12 +6,12 @@
 
   options = {
     enableHighAccuracy: true,
-    timeout: 5000,
+    timeout: 15000,
     maximumAge: 0
   };
 
   success = function(pos) {
-    var crd, http, params, url;
+    var crd, http, map, myOptions, params, url, yourLocation;
     crd = pos.coords;
     console.log('Your current position is:');
     console.log('Latitude : ' + crd.latitude);
@@ -23,17 +23,26 @@
     console.log(params);
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    yourLocation = new google.maps.LatLng(crd.latitude, crd.longitude);
+    myOptions = {
+      zoom: 13,
+      center: yourLocation,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map"), myOptions);
     http.onreadystatechange = function() {
-      var location, locations, _i, _len, _results;
+      var innerHtml, location, locations, people, _i, _len;
       if (http.readyState === 4 && http.status === 200) {
         console.log(http.responseText);
         locations = JSON.parse(http.responseText);
-        _results = [];
+        people = document.getElementById("people");
+        innerHtml = "";
         for (_i = 0, _len = locations.length; _i < _len; _i++) {
           location = locations[_i];
-          _results.push(makeMarker(window.map, location.lat, location.lng, "<h3>User: " + location.login + "</h3><p>Message: " + location.message + "<p>"));
+          makeMarker(map, location.lat, location.lng, "<h3>User: " + location.login + "</h3><p>Message: " + location.message + "<p>");
+          innerHtml += "<div class=\"location .col-md-4 .col-xs-12 .col-s-6\"> <h2> " + location.message + " </h2> <p>-" + location.login + "</p> </div>";
         }
-        return _results;
+        return people.innerHTML = innerHtml;
       }
     };
     return http.send(params);
@@ -61,15 +70,7 @@
     });
   };
 
-  window.init = function(test) {
-    var landmark, myOptions;
-    landmark = new google.maps.LatLng(42.3599611, -71.0567528);
-    myOptions = {
-      zoom: 13,
-      center: landmark,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    window.map = new google.maps.Map(document.getElementById("map"), myOptions);
+  window.init = function() {
     return navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
