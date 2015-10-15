@@ -8,7 +8,6 @@ body {
 }
 
 .location {
-    text-align: center;
 }
 
 .location p {
@@ -24,4 +23,12 @@ body {
 
 .location:nth-child(even) {
     background-color:#B2E6FF;
+}
+
+.container {
+    text-align: center;
+}
+
+.jumbotron {
+    margin-top: 30px;
 }
