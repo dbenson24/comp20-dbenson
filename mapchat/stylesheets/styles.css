@@ -3,8 +3,7 @@ body {
 }
 
 #map {
-    min-height: 500px;
-    height: 70%;
+    height: 70vh;
 }
 
 .location {
