@@ -7,6 +7,11 @@ body {
 .msg {
     padding-bottom: 15px;
     padding-top: 15px;
+    background-color:#1abc9c;
+}
+
+.msg:nth-child(even) {
+    background-color:#3498db;
 }
 
 h1 {
