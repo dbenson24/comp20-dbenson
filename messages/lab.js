@@ -16,7 +16,7 @@
         return _results;
       }
     };
-    request.open('GET', './data.json', true);
+    request.open('GET', 'http://messagehub.herokuapp.com/messages.json', true);
     request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     return request.send(null);
   };
