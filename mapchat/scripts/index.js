@@ -2,8 +2,6 @@
 (function() {
   var error, haversine, makeMarker, options, success;
 
-  console.log("Hello world");
-
   options = {
     enableHighAccuracy: true,
     timeout: 15000,
@@ -27,14 +25,9 @@
   success = function(pos) {
     var crd, http, map, myOptions, params, url, yourLocation;
     crd = pos.coords;
-    console.log('Your current position is:');
-    console.log('Latitude : ' + crd.latitude);
-    console.log('Longitude: ' + crd.longitude);
-    console.log('More or less ' + crd.accuracy + ' meters.');
     http = new XMLHttpRequest();
     url = "https://secret-about-box.herokuapp.com/sendLocation";
     params = "login=EricDapper&lat=" + crd.latitude + "&lng=" + crd.longitude + "&message=Hello%20World";
-    console.log(params);
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     yourLocation = new google.maps.LatLng(crd.latitude, crd.longitude);
@@ -49,20 +42,27 @@
     Handles panning the map when a message is clicked
      */
     window.mapPan = function(loc) {
-      console.log(loc);
       map.panTo(loc);
       return loc;
     };
     http.onreadystatechange = function() {
-      var content, distance, innerHtml, location, locations, people, _i, _len;
+      var byDistance, content, distance, i, innerHtml, location, locations, people, _i, _j, _len, _len1;
       if (http.readyState === 4 && http.status === 200) {
-        console.log(http.responseText);
         locations = JSON.parse(http.responseText);
         people = document.getElementById("people");
         innerHtml = "";
-        for (_i = 0, _len = locations.length; _i < _len; _i++) {
-          location = locations[_i];
-          distance = haversine(crd.latitude, crd.longitude, location.lat, location.lng).toFixed(2);
+        for (i = _i = 0, _len = locations.length; _i < _len; i = ++_i) {
+          location = locations[i];
+          location.distance = haversine(crd.latitude, crd.longitude, location.lat, location.lng);
+          locations[i] = location;
+        }
+        byDistance = function(a, b) {
+          return a.distance - b.distance;
+        };
+        locations.sort(byDistance);
+        for (_j = 0, _len1 = locations.length; _j < _len1; _j++) {
+          location = locations[_j];
+          distance = location.distance.toFixed(2);
           content = "<h2> " + location.message + " </h2> <p>" + location.login + "</p> <p>" + distance + "km</p>";
           makeMarker(map, location.lat, location.lng, content);
           innerHtml += "<div class=\"location .col-md-4 .col-xs-12 .col-s-6\">\n   " + content + "\n   <span class=\"glyphicon glyphicon-search search\" aria-hidden=\"true\" aria-label=\"Locate\" onclick=\"mapPan({lat:" + location.lat + ", lng:" + location.lng + "})\"></span>\n</div>";
@@ -74,7 +74,7 @@
   };
 
   error = function(error) {
-    return console.warn(error);
+    return alert(error);
   };
 
   makeMarker = function(map, lat, lng, title) {
