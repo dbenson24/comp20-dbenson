@@ -44,6 +44,10 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    /*
+    Handles panning the map when a message is clicked
+     */
     window.mapPan = function(loc) {
       console.log(loc);
       map.panTo(loc);
@@ -61,7 +65,7 @@
           distance = haversine(crd.latitude, crd.longitude, location.lat, location.lng).toFixed(2);
           content = "<h2> " + location.message + " </h2> <p>" + location.login + "</p> <p>" + distance + "km</p>";
           makeMarker(map, location.lat, location.lng, content);
-          innerHtml += "<div class=\"location .col-md-4 .col-xs-12 .col-s-6\" onclick=\"mapPan({lat:" + location.lat + ", lng:" + location.lng + "})\">" + content + "</div>";
+          innerHtml += "<div class=\"location .col-md-4 .col-xs-12 .col-s-6\">\n   " + content + "\n   <span class=\"glyphicon glyphicon-search search\" aria-hidden=\"true\" aria-label=\"Locate\" onclick=\"mapPan({lat:" + location.lat + ", lng:" + location.lng + "})\"></span>\n</div>";
         }
         return people.innerHTML = innerHtml;
       }
