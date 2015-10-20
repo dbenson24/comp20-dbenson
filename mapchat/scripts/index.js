@@ -47,26 +47,26 @@
       return loc;
     };
     http.onreadystatechange = function() {
-      var byDistance, content, distance, i, innerHtml, location, locations, people, _i, _j, _len, _len1;
+      var byDistance, content, distance, i, innerHtml, loc, locations, people, _i, _j, _len, _len1;
       if (http.readyState === 4 && http.status === 200) {
         locations = JSON.parse(http.responseText);
         people = document.getElementById("people");
         innerHtml = "";
         for (i = _i = 0, _len = locations.length; _i < _len; i = ++_i) {
-          location = locations[i];
-          location.distance = haversine(crd.latitude, crd.longitude, location.lat, location.lng);
-          locations[i] = location;
+          loc = locations[i];
+          loc.distance = haversine(crd.latitude, crd.longitude, loc.lat, loc.lng);
+          locations[i] = loc;
         }
         byDistance = function(a, b) {
           return a.distance - b.distance;
         };
         locations.sort(byDistance);
         for (_j = 0, _len1 = locations.length; _j < _len1; _j++) {
-          location = locations[_j];
-          distance = location.distance.toFixed(2);
-          content = "<h2> " + location.message + " </h2> <p>" + location.login + "</p> <p>" + distance + "km</p>";
-          makeMarker(map, location.lat, location.lng, content);
-          innerHtml += "<div class=\"location .col-md-4 .col-xs-12 .col-s-6\">\n" + content + "\n<span class=\"glyphicon glyphicon-search search\" aria-hidden=\"true\" aria-label=\"Locate\" onclick=\"mapPan({lat:" + location.lat + ", lng:" + location.lng + "})\"></span>\n</div>";
+          loc = locations[_j];
+          distance = loc.distance.toFixed(2);
+          content = "<h2> " + loc.message + " </h2> <p>" + loc.login + "</p> <p>" + distance + "km</p>";
+          makeMarker(map, loc.lat, loc.lng, content);
+          innerHtml += "<div class=\"location .col-md-4 .col-xs-12 .col-s-6\">\n" + content + "\n<span class=\"glyphicon glyphicon-search search\" aria-hidden=\"true\" aria-label=\"Locate\" onclick=\"mapPan({lat:" + loc.lat + ", lng:" + loc.lng + "})\"></span>\n</div>";
         }
         return people.innerHTML = innerHtml;
       }
@@ -75,7 +75,7 @@
   };
 
   error = function(error) {
-    return alert(error);
+    return alert("There was an error trying to locate your position, please refresh the page");
   };
 
   makeMarker = function(map, lat, lng, title) {
