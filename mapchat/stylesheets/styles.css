@@ -10,9 +10,9 @@ body {
     margin-bottom: 50px;
 }
 
-.location {
+#mapContainer {
+    padding-top:60px;
 }
-
 .location p {
     margin: 0;
     padding-bottom: 5px;
@@ -25,7 +25,7 @@ body {
 }
 
 .location:nth-child(even) {
-    background-color:#B2E6FF;
+    background-color: #B2E6FF;
 }
 
 .container {
@@ -43,9 +43,9 @@ body {
 }
 
 .location:nth-child(odd) .search:hover {
-    background-color:#f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .location:nth-child(even) .search:hover {
-    background-color:#42c2ff;
+    background-color: #42c2ff;
 }
