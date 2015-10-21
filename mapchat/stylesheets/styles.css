@@ -1,7 +1,3 @@
-body {
-    margin-top: 60px;
-}
-
 #map {
     height: 70vh;
 }
@@ -10,9 +6,6 @@ body {
     margin-bottom: 50px;
 }
 
-#mapContainer {
-    padding-top:60px;
-}
 .location p {
     margin: 0;
     padding-bottom: 5px;
