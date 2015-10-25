@@ -21,7 +21,7 @@
     dLat = (lat2 - lat1) * Math.PI / 180;
     dLon = (lon2 - lon1) * Math.PI / 180;
     a = 0.5 - Math.cos(dLat) / 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * (1 - Math.cos(dLon)) / 2;
-    return R * 2 * Math.asin(Math.sqrt(a));
+    return R * 2 * Math.asin(Math.sqrt(a)) * 0.621371;
   };
 
   success = function(pos) {
@@ -66,7 +66,7 @@
         for (_j = 0, _len1 = locations.length; _j < _len1; _j++) {
           loc = locations[_j];
           distance = loc.distance.toFixed(2);
-          content = "<h2> " + loc.message + " </h2> <p>" + loc.login + "</p> <p>" + distance + "km</p>";
+          content = "<h2> " + loc.message + " </h2> <p>" + loc.login + "</p> <p>" + distance + " mi</p>";
           makeMarker(map, loc.lat, loc.lng, content);
           innerHtml += "<div class=\"location col-xs-12\">\n" + content + "\n<span class=\"glyphicon glyphicon-search search\" aria-hidden=\"true\" aria-label=\"Locate\" onclick=\"mapPan({lat:" + loc.lat + ", lng:" + loc.lng + "})\"></span>\n</div>";
         }
