@@ -9,29 +9,34 @@
 	
 	  var refresh = function() {
 	      $("#log").html("");
-	      var log = JSON.parse(localStorage.log);
+	      var log = JSON.parse(localStorage.getItem("log"));
 	      for (var i = 0; i < log.length; i++) {
 	          $("#log").prepend("<p>"+log[i]+"</p>");
 	      }
-	  }
+	  };
 	  var submit = function(event) {
 	      if (event.which === 13) {
 	          event.preventDefault();
 	          var content = $("#msg").val();
+	          var log = JSON.parse(localStorage.getItem("log"));
+	          log.push(content);
+	          localStorage.setItem("log", JSON.stringify(log));
 	          console.log(content);
+	          console.log(log);
 	          $("#msg").val("");
+	          refresh();
 	      }
-	  }
-	
+	  };
 	
 	
 	  $("document").ready(function() {
-	      if(localStorage.log === null) {
-	          localStorage.log = JSON.stringify([]);
+	      if(localStorage.getItem("log") === null) {
+	          localStorage.setItem("log", JSON.stringify([]));
 	          console.log("First time");
 	      }
 	      
 	      $("#msg").keypress(submit);
+	      refresh();
 	  });
 	</script>
 </head>
