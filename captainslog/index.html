@@ -6,6 +6,14 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
+	
+	  var refresh = function() {
+	      $("#log").html("");
+	      var log = JSON.parse(localStorage.log);
+	      for (var i = 0; i < log.length; i++) {
+	          $("#log").prepend("<p>"+log[i]+"</p>");
+	      }
+	  }
 	  var submit = function(event) {
 	      if (event.which === 13) {
 	          event.preventDefault();
@@ -18,6 +26,11 @@
 	
 	
 	  $("document").ready(function() {
+	      if(localStorage.log === null) {
+	          localStorage.log = JSON.stringify([]);
+	          console.log("First time");
+	      }
+	      
 	      $("#msg").keypress(submit);
 	  });
 	</script>
