@@ -19,7 +19,7 @@
 	          event.preventDefault();
 	          var content = $("#msg").val();
 	          var log = JSON.parse(localStorage.getItem("log"));
-	          log.push(content);
+	          log.push((new Date()) + " - " + content);
 	          localStorage.setItem("log", JSON.stringify(log));
 	          console.log(content);
 	          console.log(log);
