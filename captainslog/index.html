@@ -6,7 +6,6 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-	
 	  var refresh = function() {
 	      $("#log").html("");
 	      var log = JSON.parse(localStorage.getItem("log"));
@@ -21,20 +20,14 @@
 	          var log = JSON.parse(localStorage.getItem("log"));
 	          log.push((new Date()) + " - " + content);
 	          localStorage.setItem("log", JSON.stringify(log));
-	          console.log(content);
-	          console.log(log);
 	          $("#msg").val("");
 	          refresh();
 	      }
 	  };
-	
-	
 	  $("document").ready(function() {
 	      if(localStorage.getItem("log") === null) {
 	          localStorage.setItem("log", JSON.stringify([]));
-	          console.log("First time");
 	      }
-	      
 	      $("#msg").keypress(submit);
 	      refresh();
 	  });
