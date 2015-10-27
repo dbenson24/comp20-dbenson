@@ -6,7 +6,20 @@
 	<title>Captain's Log</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>
-	  
+	  var submit = function(event) {
+	      if (event.which === 13) {
+	          event.preventDefault();
+	          var content = $("#msg").val();
+	          console.log(content);
+	          $("#msg").val("");
+	      }
+	  }
+	
+	
+	
+	  $("document").ready(function() {
+	      $("#msg").keypress(submit);
+	  });
 	</script>
 </head>
 
