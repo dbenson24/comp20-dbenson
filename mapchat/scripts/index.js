@@ -29,12 +29,6 @@
   Handles panning the map when a message is clicked
    */
 
-  window.mapPan = function(loc) {
-    map.panTo(loc);
-    document.getElementById("map").scrollIntoView();
-    return loc;
-  };
-
   success = function(pos) {
     var http, map, myOptions, params, url, yourLocation;
     crd = pos.coords;
@@ -45,6 +39,11 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
+    window.mapPan = function(loc) {
+      map.panTo(loc);
+      document.getElementById("map").scrollIntoView();
+      return loc;
+    };
     http = new XMLHttpRequest();
     url = "https://secret-about-box.herokuapp.com/sendLocation";
     params = "login=EricDapper&lat=" + crd.latitude + "&lng=" + crd.longitude + "&message=Hello%20World";
