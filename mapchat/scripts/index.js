@@ -27,11 +27,6 @@
   success = function(pos) {
     var http, map, myOptions, params, url, yourLocation;
     crd = pos.coords;
-    http = new XMLHttpRequest();
-    url = "https://secret-about-box.herokuapp.com/sendLocation";
-    params = "login=EricDapper&lat=" + crd.latitude + "&lng=" + crd.longitude + "&message=Hello%20World";
-    http.open("POST", url, true);
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     yourLocation = new google.maps.LatLng(crd.latitude, crd.longitude);
     myOptions = {
       zoom: 13,
@@ -39,6 +34,11 @@
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map"), myOptions);
+    http = new XMLHttpRequest();
+    url = "https://secret-about-box.herokuapp.com/sendLocation";
+    params = "login=EricDapper&lat=" + crd.latitude + "&lng=" + crd.longitude + "&message=Hello%20World";
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     /*
     Handles panning the map when a message is clicked
