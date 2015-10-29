@@ -24,6 +24,17 @@
     return R * 2 * Math.asin(Math.sqrt(a));
   };
 
+
+  /*
+  Handles panning the map when a message is clicked
+   */
+
+  window.mapPan = function(loc) {
+    map.panTo(loc);
+    document.getElementById("map").scrollIntoView();
+    return loc;
+  };
+
   success = function(pos) {
     var http, map, myOptions, params, url, yourLocation;
     crd = pos.coords;
@@ -39,15 +50,6 @@
     params = "login=EricDapper&lat=" + crd.latitude + "&lng=" + crd.longitude + "&message=Hello%20World";
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    /*
-    Handles panning the map when a message is clicked
-     */
-    window.mapPan = function(loc) {
-      map.panTo(loc);
-      document.getElementById("map").scrollIntoView();
-      return loc;
-    };
     http.onreadystatechange = function() {
       var byDistance, content, distance, i, innerHtml, loc, locations, people, _i, _j, _len, _len1;
       if (http.readyState === 4 && http.status === 200) {
