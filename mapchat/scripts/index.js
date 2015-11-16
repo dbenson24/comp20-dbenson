@@ -53,7 +53,6 @@
       var byDistance, content, distance, i, innerHtml, loc, locations, people, _i, _j, _len, _len1;
       if (http.readyState === 4 && http.status === 200) {
         locations = JSON.parse(http.responseText);
-        console.log(locations);
         people = document.getElementById("people");
         innerHtml = "";
         for (i = _i = 0, _len = locations.length; _i < _len; i = ++_i) {
