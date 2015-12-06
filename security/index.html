@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Introduction
+            </div>
+            <div class="panel-body">
+                <p>
+                    I was hired by Niketan Patel to test his MapChat application for
+                    security vulnerabilities.
+                </p>
+                <p>
+                    His client-facing map can be found <a href="http://tuftsdev.github.io/comp20-npatel/mapchat/">here</a>
+                </p>
+                <p>
+                    His server can be found <a href="https://young-ridge-5426.herokuapp.com/">here</a>
+                </p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Methodology
+            </div>
+            <div class="panel-body">
+                <p>
+                    I used Postman to make custom http requests to the server.
+                    I also used the chrome developement tools to examine and modify 
+                    his client side code.
+                </p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Abstract of Findings
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Issues Found
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>
+                        A number of the important javascript variables are globally scoped
+                        and could be potentially exploited.
+                    </li>
+                    <li>
+                        Arbitrary HTML can be inserted into the clientside map after
+                        being sent to the database. This could easily lead to script
+                        injection via the &lt;script&gt; tag.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Conclusion
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
+</html>
