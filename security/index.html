@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Bootstrap 101 Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -14,8 +16,7 @@
             </div>
             <div class="panel-body">
                 <p>
-                    I was hired by Niketan Patel to test his MapChat application for
-                    security vulnerabilities.
+                    I was hired by Niketan Patel to test his MapChat application for security vulnerabilities.
                 </p>
                 <p>
                     His client-facing map can be found <a href="http://tuftsdev.github.io/comp20-npatel/mapchat/">here</a>
@@ -31,9 +32,7 @@
             </div>
             <div class="panel-body">
                 <p>
-                    I used Postman to make custom http requests to the server.
-                    I also used the chrome developement tools to examine and modify 
-                    his client side code.
+                    I used Postman to make custom http requests to the server. I also used the chrome developement tools to examine and modify his client side code.
                 </p>
             </div>
         </div>
@@ -49,17 +48,77 @@
                 Issues Found
             </div>
             <div class="panel-body">
-                <ul>
-                    <li>
-                        A number of the important javascript variables are globally scoped
-                        and could be potentially exploited.
-                    </li>
-                    <li>
-                        Arbitrary HTML can be inserted into the clientside map after
-                        being sent to the database. This could easily lead to script
-                        injection via the &lt;script&gt; tag.
-                    </li>
-                </ul>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        SEVERE
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>Issue:</strong> XSS</p>
+                        <p><strong>Location:</strong> POST to /sendlocation</p>
+                        <p><strong>Description:</strong> Arbitrary HTML can be inserted into the clientside map after being sent to the database. This could easily lead to script injection via the &lt;script&gt; tag. This injected HTML will load the on home
+                            page of the server and any unsuspecting clients that don't manually sanitize the response from this server.</p>
+                        <p><strong>Proof:</strong><img src="./IMGInjection.png" class="img-responsive" alt="Screenshot of hack" /></p>
+                        <p><strong>Resolution:</strong> This issue can be avoided by sanitizing the database inputs before using them. There are numerous packages on NPM to help do this, <a href="https://www.npmjs.com/package/sanitize-html">sanatize-html</a>                            is one. Once you install it, using it is as simple as this:
+                            <div class="well">var sanitizeHtml = require('sanitize-html');
+                                <br>var dirty = 'some really tacky HTML';
+                                <br>var clean = sanitizeHtml(dirty);
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        SEVERE
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>Issue:</strong> XSS</p>
+                        <p><strong>Location:</strong> Homepage of assignment 2 and homepage of assignment 3</p>
+                        <p><strong>Description:</strong> Inputs recieved from the server are not sanitized on the client before being inserted into the DOM. While it is important that the server sanatize all inputs it recieves, clients should also perform
+                            santization checks before manipulating the DOM with data recieved from the user or a server.</p>
+                        <p><strong>Proof:</strong><img src="./ClientSideInjection.png" class="img-responsive" alt="Screenshot of hack" /></p>
+                        <p><strong>Resolution:</strong> This issue can be avoided by santizing the string before injection it into the DOM. Something as simple as this would work:
+                            <div class="well">var halfClean = dirtyString.replace("&lt;", "&amplt;");
+                                <br>var clean = halfClean.replace("&gt;", "&ampgt;");
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Low
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>Issue:</strong> CORS is enabled for all domains</p>
+                        <p><strong>Location:</strong> GET /latest.json and POST to /sendlocation</p>
+                        <p><strong>Description:</strong> The server is allowing all hosts that match the wildcard to post and get data from those routes. This could be a potential vulnerability if that information should only be able to be requested from
+                            a limited number of hosts.</p>
+                        <p><strong>Proof:</strong><img src="./CORSWildcard.png" class="img-responsive" alt="Screenshot of hack" /></p>
+                        <p><strong>Resolution:</strong> If this is not the intended security behavior of these routes, then the Access-Control-Allow-Origin header should be changed to only allow certain websites. This is best done in express using a package
+                            like <a href="https://www.npmjs.com/package/cors">cors</a>. Their example code is shown below:
+                            <div class="well">
+                                var express = require('express')
+                                <br> &emsp;&emsp;&emsp;&emsp;&emsp;, cors = require('cors')
+                                <br> &emsp;&emsp;&emsp;&emsp;&emsp;, app = express();
+                                <br>
+                                <br> var whitelist = ['http://example1.com', 'http://example2.com'];
+                                <br> var corsOptions = {
+                                <br> &emsp;&emsp;origin: function(origin, callback){
+                                <br> &emsp;&emsp;&emsp;&emsp;var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+                                <br> &emsp;&emsp;&emsp;&emsp;callback(null, originIsWhitelisted);
+                                <br> &emsp;&emsp;}
+                                <br> };
+                                <br>
+                                <br> app.get('/products/:id', cors(corsOptions), function(req, res, next){
+                                <br> &emsp;&emsp;res.json({msg: 'This is CORS-enabled for a whitelisted domain.'});
+                                <br> });
+                                <br>
+                                <br> app.listen(80, function(){
+                                <br> &emsp;&emsp;console.log('CORS-enabled web server listening on port 80');
+                                <br> });
+                            </div>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel panel-default">
@@ -72,5 +131,6 @@
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  </body>
+</body>
+
 </html>
