@@ -67,7 +67,7 @@
                         <p><strong>Description:</strong> Arbitrary HTML can be inserted into the clientside map after being sent to the database. This could easily lead to script injection via the &lt;script&gt; tag. This injected HTML will load the on home
                             page of the server and any unsuspecting clients that don't manually sanitize the response from this server.</p>
                         <p><strong>Proof:</strong><img src="./IMGInjection.png" class="img-responsive" alt="Screenshot of hack" /></p>
-                        <p><strong>Resolution:</strong> This issue can be avoided by sanitizing the database inputs before using them. There are numerous packages on NPM to help do this, <a href="https://www.npmjs.com/package/sanitize-html">sanatize-html</a>                            is one. Once you install it, using it is as simple as this: </p>
+                        <p><strong>Resolution:</strong> This issue can be avoided by sanitizing the database inputs before using them. There are numerous packages on NPM to help do this, <a href="https://www.npmjs.com/package/sanitize-html">sanitize-html</a>                            is one. Once you install it, using it is as simple as this: </p>
                         <div class="well">var sanitizeHtml = require('sanitize-html');
                             <br>var dirty = 'some really tacky HTML';
                             <br>var clean = sanitizeHtml(dirty);
@@ -81,10 +81,10 @@
                     <div class="panel-body">
                         <p><strong>Issue:</strong> XSS</p>
                         <p><strong>Location:</strong> Homepage of assignment 2 and homepage of assignment 3</p>
-                        <p><strong>Description:</strong> Inputs recieved from the server are not sanitized on the client before being inserted into the DOM. While it is important that the server sanatize all inputs it recieves, clients should also perform
-                            santization checks before manipulating the DOM with data recieved from the user or a server.</p>
+                        <p><strong>Description:</strong> Inputs recieved from the server are not sanitized on the client before being inserted into the DOM. While it is important that the server sanitize all inputs it receives, clients should also perform
+                            sanitation checks before manipulating the DOM with data recieved from the user or a server.</p>
                         <p><strong>Proof:</strong><img src="./ClientSideInjection.png" class="img-responsive" alt="Screenshot of hack" /></p>
-                        <p><strong>Resolution:</strong> This issue can be avoided by santizing the string before injection it into the DOM. Something as simple as this would work: </p>
+                        <p><strong>Resolution:</strong> This issue can be avoided by sanitizing the string before injection it into the DOM. Something as simple as this would work: </p>
                         <div class="well">var dirtyString = "&lt;script&gt;MALICIOUS STUFF&lt;/script&gt;"
                             <br>var halfClean = dirtyString.replace("&lt;", "&amp;lt;");
                             <br>var clean = halfClean.replace("&gt;", "&amp;gt;");
@@ -136,9 +136,9 @@
             <div class="panel-body">
                 <p>
                     Security is an important concept for any application that is exposed to the internet. It's impossible to predict every attack vector that a malicious individual might attempt, but it is necessary for developers to do their due diligence and prevent as
-                    many exploits as they can. A large security breech could bring the success of a wildly succesful product to a screeching halt if they lose the trust of their userbase. The application that I tested was extremely small in comparison
+                    many exploits as they can. A large security breech could bring the success of a wildly successful product to a screeching halt if they lose the trust of their userbase. The application that I tested was extremely small in comparison
                     with most production web applications, yet it already has at least 2 serious vulnerabilities. This demonstrates the difficulty of making web applications secure as well as the need for security to be a consideration from the beginning
-                    of developement, not something hastily tacked on at the end.
+                    of development, not something hastily tacked on at the end.
                 </p>
             </div>
         </div>
