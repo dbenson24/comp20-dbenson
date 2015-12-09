@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Bootstrap 101 Template</title>
+    <title>MapChat Security Analysis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -10,6 +10,11 @@
 
 <body>
     <div class="container">
+        <div class="jumbotron">
+            <h3><a href="https://github.com/dbenson24">Derek Benson</a></h3>
+            <h4>Assignment 4</h4>
+            <h4>12/8/2015</h4>
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 Introduction
@@ -32,7 +37,7 @@
             </div>
             <div class="panel-body">
                 <p>
-                    I used Postman to make custom http requests to the server. I also used the chrome developement tools to examine and modify his client side code.
+                    I used Postman to make custom http requests to the server. I also used the chrome developement tools to examine and modify his client side code. After completing some inital testing, I reviewed Niketan's source code to see if I could find any other vulnerabilities.
                 </p>
             </div>
         </div>
@@ -41,6 +46,9 @@
                 Abstract of Findings
             </div>
             <div class="panel-body">
+                <p>
+                    
+                </p>
             </div>
         </div>
         <div class="panel panel-default">
@@ -77,13 +85,14 @@
                             santization checks before manipulating the DOM with data recieved from the user or a server.</p>
                         <p><strong>Proof:</strong><img src="./ClientSideInjection.png" class="img-responsive" alt="Screenshot of hack" /></p>
                         <p><strong>Resolution:</strong> This issue can be avoided by santizing the string before injection it into the DOM. Something as simple as this would work:
-                            <div class="well">var halfClean = dirtyString.replace("&lt;", "&amplt;");
+                            <div class="well">var dirtyString = "&lt;script&gt;MALICIOUS STUFF&lt;/script&gt;"
+                                <br>var halfClean = dirtyString.replace("&lt;", "&amplt;");
                                 <br>var clean = halfClean.replace("&gt;", "&ampgt;");
                             </div>
                         </p>
                     </div>
                 </div>
-                <div class="panel panel-success">
+                <div class="panel panel-warning">
                     <div class="panel-heading">
                         Low
                     </div>
@@ -126,6 +135,12 @@
                 Conclusion
             </div>
             <div class="panel-body">
+                <p>
+                    Security is an important concept for any application that is exposed to the internet. It's impossible to predict every attack vector that a malicious individual might attempt, but it is necessary for developers to do their due diligence and prevent as
+                    many exploits as they can. A large security breech could bring the success of a wildly succesful product to a screeching halt if they lose the trust of their userbase. The application that I tested was extremely small in comparison
+                    with most production web applications, yet it already has at least 2 serious vulnerabilities. This demonstrates the difficulty of making web applications secure as well as the need for security to be a consideration from the beginning
+                    of developement, not something hastily tacked on at the end.
+                </p>
             </div>
         </div>
     </div>
